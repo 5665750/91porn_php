@@ -14,7 +14,7 @@
 如果需要不占用内存的版本，请下载<a href="https://github.com/zzjzz9266a/91porn_php/releases/tag/v1.0.0">v1.0.0</a>
 
 ### 基本使用
-91porn.php是爬取首页的视频，直接运行即可
+91porn.php是爬取首页的视频，直接运行即可 <注：如果提示错误，在网站根据目录创建 videos 文件夹>
 
 91all.php是爬取列表页的，例如“收藏最多”、“本月最热”等等，要别的列表的话可以去找对应的url
 ```` php

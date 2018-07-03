@@ -1,7 +1,7 @@
 <?PHP
 
-$baseURL = 'http://xxoo.com';
-$list = file_get_contents($baseURL);	//改成对应vps的域名或ip
+$baseURL = 'http://xxoo.com';//改成对应vps的域名或ip
+$list = file_get_contents($baseURL);	
 $list = json_decode($list);
 
 $lastDownloaded = 0;

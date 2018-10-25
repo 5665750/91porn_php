@@ -2,17 +2,22 @@
 
 class Downloader
 {
+
+	static $defaultPath = './videos';	//默认储存路径
+	// static $defaultPath = '/Users/ooxx/Downloads/videos';
+
 	static $lastDownloaded = 0;
 	static $lastTime = null;
 
 	public static function download($url, $fileName, $date)
 	{
+		ini_set('memory_limit','2048M');	//调整最大占用内存
 		$fileName = preg_replace('# #','',$fileName);
-		if (!is_dir('./videos')) {
-			mkdir('./videos');
+		if (!is_dir(Downloader::$defaultPath)) {
+			mkdir(Downloader::$defaultPath);
 		}
 
-		$filePath = './videos/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
+		$filePath = Downloader::$defaultPath.'/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
 		if (file_exists($filePath)){
 			echo "\033[0;32m"."文件已存在"."\033[0m\n";
 			return;
@@ -25,6 +30,7 @@ class Downloader
 		$ch = curl_init();
 		// 从配置文件中获取根路径
 		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_TIMEOUT,300);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		// 开启进度条
@@ -36,10 +42,13 @@ class Downloader
 
 		$data = curl_exec($ch);
 		curl_close($ch);
+		
+		if ($data) {
+			$file = fopen($filePath,"w+");
+			fputs($file,$data);//写入文件
+			fclose($file);
+		}
 
-		$file = fopen($filePath,"w+");
-		fputs($file,$data);//写入文件
-		fclose($file);
 		unset($data);
 	}
 

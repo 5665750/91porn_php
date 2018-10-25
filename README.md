@@ -9,7 +9,10 @@
 </p>
   
 ## 使用说明
-当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整php.ini中内存的限制，最好在256mb以上，否则有可能出现内存溢出。
+当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整downloader.php中内存的限制，最好在256mb以上，否则有可能出现内存溢出。  
+````
+ini_set('memory_limit','2048M');	//调整最大占用内存
+````
 
 如果需要不占用内存的版本，请下载<a href="https://github.com/zzjzz9266a/91porn_php/releases/tag/v1.0.0">v1.0.0</a>
 
@@ -25,6 +28,10 @@ listPage("http://91porn.com/v.php?category=md&viewtype=basic");		//本月讨论
 爬取页数可以自行更改，默认到10页；
 ````
 $maxPage = 10;	//更改爬取页数
+````
+可以在downloader.php中更改视频的默认存放路径：
+````
+static $defaultPath = './videos';	//默认储存路径
 ````
 
 下载完成后就可以到videos目录下high啦，嘿嘿嘿~~~
